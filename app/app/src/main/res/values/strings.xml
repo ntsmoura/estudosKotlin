@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Aprendendo Kotlin</string>
+    <string name="button1">Clique no botao</string>
+    <string name="notnull">Não vazio.</string>
+    <string name="sub">Submit</string>
+    <string name="dica">Digite qualquer texto...</string>
+</resources>
