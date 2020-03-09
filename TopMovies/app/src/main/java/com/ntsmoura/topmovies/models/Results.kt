@@ -1,10 +1,7 @@
-package com.example.topmovies
+package com.ntsmoura.topmovies.models
 
 import com.google.gson.annotations.SerializedName
 
-data class PopularMovies(
-    @SerializedName("results") val results : List<Results>
-)
 
 data class Results (
     @SerializedName("poster_path") val poster_path : String,
