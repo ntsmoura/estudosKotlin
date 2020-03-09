@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 
-class MovieAdapter(val movieList: ArrayList<Movie>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
+class MovieAdapter(val movieList: List<Results>) : RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.movie_layout,parent,false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.movie_layout,parent,false)
         return ViewHolder(v)
     }
 
@@ -19,7 +19,7 @@ class MovieAdapter(val movieList: ArrayList<Movie>) : RecyclerView.Adapter<Movie
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie: Movie = movieList[position]
+        val movie: Results = movieList[position]
         holder.movieTextView.text = movie.title
         if(position%2!=0) holder.movieImg.setImageResource(R.mipmap.simp)
     }
