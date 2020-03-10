@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface TmdbInterface {
-    @GET("popular?")
+    @GET("popular")
     fun getMovies(
         @Query("api_key") key: String,
         @Query("language") language: String

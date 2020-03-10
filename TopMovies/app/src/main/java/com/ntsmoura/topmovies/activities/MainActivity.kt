@@ -18,20 +18,17 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var recyclerView: RecyclerView
     private lateinit var recyclerAdapter: MovieAdapter
     private var listMovies: ArrayList<Results> = arrayListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        recyclerView = recyclerV
         recyclerAdapter =
             MovieAdapter(this, listMovies)
-        recyclerView.layoutManager = GridLayoutManager(this@MainActivity, 2)
-        recyclerView.adapter = recyclerAdapter
+        mainRV.layoutManager = GridLayoutManager(this@MainActivity, 2)
+        mainRV.adapter = recyclerAdapter
 
         getData()
-
     }
 
 
@@ -44,8 +41,8 @@ class MainActivity : AppCompatActivity() {
         call.enqueue(object : Callback<PopularMovies> {
             override fun onResponse(call: Call<PopularMovies>, response: Response<PopularMovies>) {
                 if (response.isSuccessful) {
-                    listMovies.addAll(response.body()!!.results)
-                    recyclerV.adapter!!.notifyItemRangeInserted(
+                    response.body()?.results?.let { listMovies.addAll(it) }
+                    mainRV.adapter?.notifyItemRangeInserted(
                         recyclerAdapter.itemCount,
                         listMovies.size
                     )
@@ -55,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             override fun onFailure(call: Call<PopularMovies>, t: Throwable) {
                 Toast.makeText(
                     this@MainActivity,
-                    "Não foi possível encontrar filmes, verifique a conexão!",
+                    R.string.network_error,
                     Toast.LENGTH_SHORT
                 ).show()
             }

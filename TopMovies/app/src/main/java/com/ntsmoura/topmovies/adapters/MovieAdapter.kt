@@ -5,15 +5,13 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.ntsmoura.topmovies.R
 import com.ntsmoura.topmovies.activities.DescriptionActivity
-import com.ntsmoura.topmovies.utils.HTTPConstants
 import com.ntsmoura.topmovies.models.Results
+import com.ntsmoura.topmovies.utils.HTTPConstants
+import kotlinx.android.synthetic.main.movie_layout.view.*
 
 class MovieAdapter(private val context: Context, private val movieList: List<Results>) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
@@ -28,21 +26,23 @@ class MovieAdapter(private val context: Context, private val movieList: List<Res
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val movie: Results = movieList[position]
-        holder.movieTextView.text = movie.title
-        Glide.with(context).load(HTTPConstants.IMAGE_BASE + movie.poster_path).into(holder.movieImg)
-        holder.cardV.setOnClickListener {
-            val intent = Intent(context, DescriptionActivity::class.java).apply {
-                putExtra("movie_overview", movie.overview)
-                putExtra("movie_banner", movie.poster_path)
+        val movie = movieList[position]
+        holder.apply {
+            itemView.titleTXT.text = movie.title
+            itemView.posterIMG.contentDescription = R.string.poster_content.toString() + movie.title
+            Glide.with(context).load(HTTPConstants.IMAGE_BASE + movie.posterPath)
+                .into(holder.itemView.posterIMG)
+            itemView.moviesCV.setOnClickListener {
+                val intent = Intent(context, DescriptionActivity::class.java).apply {
+                    putExtra("movieOverview", movie.overview)
+                    putExtra("movieBanner", movie.posterPath)
+                    putExtra("movieTitle",movie.title)
+                }
+                context.startActivity(intent)
             }
-            context.startActivity(intent)
+
         }
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val movieTextView = itemView.findViewById(R.id.textView2) as TextView
-        val movieImg = itemView.findViewById(R.id.imageView4) as ImageView
-        val cardV = itemView.findViewById(R.id.card_v) as CardView
-    }
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
