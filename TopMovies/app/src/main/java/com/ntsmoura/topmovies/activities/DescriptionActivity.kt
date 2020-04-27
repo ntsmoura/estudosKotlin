@@ -12,9 +12,9 @@ class DescriptionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_description)
-        val description: String
-        val banner: String
-        val title: String
+        val description: String?
+        val banner: String?
+        val title: String?
         with(intent) {
             description = getStringExtra("movieOverview")
             banner = getStringExtra("movieBanner")
