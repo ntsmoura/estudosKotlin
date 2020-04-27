@@ -12,11 +12,16 @@ class DescriptionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_description)
-        val description = intent.getStringExtra("movieOverview")
-        val banner = intent.getStringExtra("movieBanner")
-        val title = intent.getStringExtra("movieTitle")
+        val description: String
+        val banner: String
+        val title: String
+        with(intent) {
+            description = getStringExtra("movieOverview")
+            banner = getStringExtra("movieBanner")
+            title = getStringExtra("movieTitle")
+        }
         Glide.with(this).load(HTTPConstants.IMAGE_BASE + banner).into(bannerIMG)
         overviewTXT.text = description
-        bannerIMG.contentDescription = R.string.poster_content.toString() + title
+        bannerIMG.contentDescription = applicationContext.getString(R.string.poster_content, title)
     }
 }

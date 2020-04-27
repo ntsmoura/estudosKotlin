@@ -21,22 +21,22 @@ class MovieAdapter(private val context: Context, private val movieList: List<Res
         return ViewHolder(v)
     }
 
-    override fun getItemCount(): Int {
-        return movieList.size
-    }
+    override fun getItemCount(): Int = movieList.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val movie = movieList[position]
         holder.apply {
-            itemView.titleTXT.text = movie.title
-            itemView.posterIMG.contentDescription = R.string.poster_content.toString() + movie.title
+            itemView.apply {
+                titleTXT.text = movie.title
+                posterIMG.contentDescription = R.string.poster_content.toString() + movie.title
+            }
             Glide.with(context).load(HTTPConstants.IMAGE_BASE + movie.posterPath)
                 .into(holder.itemView.posterIMG)
             itemView.moviesCV.setOnClickListener {
                 val intent = Intent(context, DescriptionActivity::class.java).apply {
                     putExtra("movieOverview", movie.overview)
                     putExtra("movieBanner", movie.posterPath)
-                    putExtra("movieTitle",movie.title)
+                    putExtra("movieTitle", movie.title)
                 }
                 context.startActivity(intent)
             }

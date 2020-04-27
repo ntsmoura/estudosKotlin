@@ -25,9 +25,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         recyclerAdapter =
             MovieAdapter(this, listMovies)
-        mainRV.layoutManager = GridLayoutManager(this@MainActivity, 2)
-        mainRV.adapter = recyclerAdapter
-
+        mainRV.apply {
+            layoutManager = GridLayoutManager(this@MainActivity, 2)
+            adapter = recyclerAdapter
+        }
         getData()
     }
 

@@ -2,5 +2,5 @@
     <string name="app_name">TopMovies</string>
     <string name="descript">Descrição</string>
     <string name="network_error">Não foi possível encontrar filmes, verifique a conexão!</string>
-    <string name="poster_content">Pôster de </string>
+    <string name="poster_content">Pôster de %s</string>
 </resources>
