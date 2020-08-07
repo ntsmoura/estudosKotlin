@@ -1,12 +1,11 @@
-package com.example.topmovies
+package com.ntsmoura.topmovies.utils
 
-import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class NetworkUtils {
     companion object {
-        fun getRetrofitInstance(path : String) : Retrofit {
+        fun getRetrofitInstance(path: String): Retrofit {
             return Retrofit.Builder()
                 .baseUrl(path)
                 .addConverterFactory(GsonConverterFactory.create())
